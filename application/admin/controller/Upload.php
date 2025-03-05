@@ -32,16 +32,9 @@ class Upload extends Base
         }
     }
 
-    public function upload()
+    public function upload($p=[])
     {
-        $file = request()->file('file');
-        if($file) {
-            echo "文件上传成功";
-            var_dump($file);
-        } else {
-            echo "文件上传失败";
-            var_dump($_FILES);
-        }
+		return model('Upload')->upload($p);
     }
 
 

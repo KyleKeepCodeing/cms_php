@@ -61,22 +61,12 @@ $(function() {
                     src: maccms.path_tpl + '/images/pro/lang-en.png',
                     href:'#'
                 },
-                {
-                    title:'Tiếng Việt',
-                    lang:'vn',
-                    templet:'<div class="lang" data-lang="vn"><img class="lang-img" src="' + maccms.path_tpl + '/images/pro/lang-vn.png"><span class="lang-txt" data-lang="string_lang_vn">Tiếng Việt</span></div>',
-                    id:3,
-                    src: maccms.path_tpl + '/images/pro/lang-vn.png',
-                    href:'#'
-                },
             ],
             click:function(data,othis){
                 let lang=data.lang
                 let new_lang=''
                 if(lang == 'en'){
                     new_lang = 1;
-                }else if(lang == 'vn'){
-                    new_lang = 2;
                 }else{
                     new_lang = 0;
                 }
