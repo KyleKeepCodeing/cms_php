@@ -21,7 +21,7 @@ class Scan extends Controller
     /**
      * 检查并添加翻译字段
      */
-    public function checkTranslateField()
+    public function check_translate_field()
     {
         echo 1;exit;
         try {
@@ -52,11 +52,11 @@ class Scan extends Controller
     /**
      * 扫描并翻译电影
      */
-    public function scanAndTranslate()
+    public function scan_and_translate()
     {
         try {
             // 先检查字段是否存在
-            $this->checkTranslateField();
+            $this->check_translate_field();
 
             // 获取未翻译的视频
             $videos = $this->vodModel->where('translated', 0)->select();
@@ -67,7 +67,7 @@ class Scan extends Controller
             foreach ($videos as $video) {
                 if (!empty($video['vod_name'])) {
                     // 调用翻译API
-                    $translatedText = $this->translateText($video['vod_name']);
+                    $translatedText = $this->translate_text($video['vod_name']);
                     
                     if ($translatedText) {
                         // 更新视频信息
@@ -94,7 +94,7 @@ class Scan extends Controller
     /**
      * 调用翻译API
      */
-    protected function translateText($text)
+    protected function translate_text($text)
     {
         try {
             $url = "http://47.83.131.112:8010/translate?text=" . urlencode($text);
