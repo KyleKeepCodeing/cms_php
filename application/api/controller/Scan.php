@@ -6,6 +6,7 @@ use think\Controller;
 use think\Db;
 use think\Exception;
 use think\facade\Config;
+use think\facade\Env;
 
 class Scan extends Controller
 {
@@ -14,19 +15,6 @@ class Scan extends Controller
     public function __construct()
     {
         parent::__construct();
-        // 设置数据库配置
-        $config = [
-            'type'     => env('database_type', 'mysql'),
-            'hostname' => env('database_host', '127.0.0.1'),
-            'database' => env('database_name', ''),
-            'username' => env('database_user', ''),
-            'password' => env('database_password', ''),
-            'hostport' => env('database_port', '3306'),
-            'charset'  => env('database_charset', 'utf8'),
-            'prefix'   => env('database_table_prefix', 'mac_'),
-        ];
-        
-        Db::connect($config);
         $this->movieModel = Db::name('movie');
     }
 
@@ -37,7 +25,8 @@ class Scan extends Controller
     {
         try {
             // 检查是否存在translated字段
-            $fields = Db::query("SHOW COLUMNS FROM " . Config::get('database.prefix') . "movie");
+            $prefix = Config::get('database.prefix') ?: 'mac_';
+            $fields = Db::query("SHOW COLUMNS FROM {$prefix}movie");
             $hasTranslated = false;
             
             foreach ($fields as $field) {
@@ -49,7 +38,7 @@ class Scan extends Controller
 
             // 如果不存在translated字段，则添加
             if (!$hasTranslated) {
-                Db::execute("ALTER TABLE " . Config::get('database.prefix') . "movie ADD translated TINYINT(1) DEFAULT 0");
+                Db::execute("ALTER TABLE {$prefix}movie ADD translated TINYINT(1) DEFAULT 0");
                 return json(['code' => 1, 'msg' => '翻译字段添加成功']);
             }
             
