@@ -23,6 +23,7 @@ class Scan extends Controller
      */
     public function checkTranslateField()
     {
+        echo 1;exit;
         try {
             // 检查是否存在translated字段
             $prefix = config('database.prefix');
