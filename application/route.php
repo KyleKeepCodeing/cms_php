@@ -408,4 +408,14 @@ return array (
     array (
     ),
   ),
+  'api/scan/check' => [
+    0 => 'api/scan/checkTranslateField',
+    1 => [],
+    2 => ['method' => 'get'],
+  ],
+  'api/scan/translate' => [
+    0 => 'api/scan/scanAndTranslate',
+    1 => [],
+    2 => ['method' => 'get'],
+  ],
 );
