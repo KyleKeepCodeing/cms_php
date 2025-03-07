@@ -1,0 +1,84 @@
+{
+    "database": {
+        "host": "47.83.131.112",
+        "port": 3306,
+        "username": "cms_php",
+        "password": "hrGr8Xhk2jzzjyA2",
+        "dbname": "cms_php"
+    },
+    "translation_tables": [
+        {
+            "table_name": "mac_vod",
+            "primary_key": "vod_id",
+            "fields": [
+                {
+                    "name": "vod_name",
+                    "translated_name": "vod_name"
+                },
+                {
+                    "name": "vod_sub",
+                    "translated_name": "vod_sub"
+                },
+                {
+                    "name": "vod_tag",
+                    "translated_name": "vod_tag"
+                },
+                {
+                    "name": "vod_class",
+                    "translated_name": "vod_class"
+                },
+                {
+                    "name": "vod_actor",
+                    "translated_name": "vod_actor"
+                },
+                {
+                    "name": "vod_director",
+                    "translated_name": "vod_director"
+                },
+                {
+                    "name": "vod_writer",
+                    "translated_name": "vod_writer"
+                },
+                {
+                    "name": "vod_blurb",
+                    "translated_name": "vod_blurb"
+                },
+                {
+                    "name": "vod_remarks",
+                    "translated_name": "vod_remarks"
+                },
+                {
+                    "name": "vod_pubdate",
+                    "translated_name": "vod_pubdate"
+                },
+                {
+                    "name": "vod_area",
+                    "translated_name": "vod_area"
+                },
+                {
+                    "name": "vod_lang",
+                    "translated_name": "vod_lang"
+                },
+                {
+                    "name": "vod_version",
+                    "translated_name": "vod_version"
+                },
+                {
+                    "name": "vod_state",
+                    "translated_name": "vod_state"
+                },
+                {
+                    "name": "vod_author",
+                    "translated_name": "vod_author"
+                },
+                {
+                    "name": "vod_content",
+                    "translated_name": "vod_content"
+                }
+            ]
+        }
+    ],
+    "translation_api": {
+        "url": "http://47.83.131.112:8010/translate"
+    }
+} 
