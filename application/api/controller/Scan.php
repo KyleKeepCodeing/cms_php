@@ -6,16 +6,16 @@ use think\Controller;
 use think\Db;
 use think\Exception;
 use think\facade\Config;
-use think\facade\Env;
+use app\common\model\Vod;
 
 class Scan extends Controller
 {
-    protected $movieModel;
+    protected $vodModel;
 
     public function __construct()
     {
         parent::__construct();
-        $this->movieModel = Db::name('movie');
+        $this->vodModel = new Vod();
     }
 
     /**
@@ -25,8 +25,8 @@ class Scan extends Controller
     {
         try {
             // 检查是否存在translated字段
-            $prefix = Config::get('database.prefix') ?: 'mac_';
-            $fields = Db::query("SHOW COLUMNS FROM {$prefix}movie");
+            $prefix = config('database.prefix');
+            $fields = Db::query("SHOW COLUMNS FROM {$prefix}vod");
             $hasTranslated = false;
             
             foreach ($fields as $field) {
@@ -38,7 +38,7 @@ class Scan extends Controller
 
             // 如果不存在translated字段，则添加
             if (!$hasTranslated) {
-                Db::execute("ALTER TABLE {$prefix}movie ADD translated TINYINT(1) DEFAULT 0");
+                Db::execute("ALTER TABLE {$prefix}vod ADD translated TINYINT(1) DEFAULT 0");
                 return json(['code' => 1, 'msg' => '翻译字段添加成功']);
             }
             
@@ -57,25 +57,22 @@ class Scan extends Controller
             // 先检查字段是否存在
             $this->checkTranslateField();
 
-            // 获取未翻译的电影
-            $movies = $this->movieModel
-                ->where('translated', 0)
-                ->select();
+            // 获取未翻译的视频
+            $videos = $this->vodModel->where('translated', 0)->select();
 
             $successCount = 0;
             $failCount = 0;
 
-            foreach ($movies as $movie) {
-                if (!empty($movie['name'])) {
+            foreach ($videos as $video) {
+                if (!empty($video['vod_name'])) {
                     // 调用翻译API
-                    $translatedText = $this->translateText($movie['name']);
+                    $translatedText = $this->translateText($video['vod_name']);
                     
                     if ($translatedText) {
-                        // 更新电影信息
-                        $this->movieModel->where('id', $movie['id'])->update([
-                            'name' => $translatedText,
-                            'translated' => 1
-                        ]);
+                        // 更新视频信息
+                        $video->vod_name = $translatedText;
+                        $video->translated = 1;
+                        $video->save();
                         $successCount++;
                     } else {
                         $failCount++;
