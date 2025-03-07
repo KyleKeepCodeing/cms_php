@@ -14,6 +14,19 @@ class Scan extends Controller
     public function __construct()
     {
         parent::__construct();
+        // 设置数据库配置
+        $config = [
+            'type'     => env('database_type', 'mysql'),
+            'hostname' => env('database_host', '127.0.0.1'),
+            'database' => env('database_name', ''),
+            'username' => env('database_user', ''),
+            'password' => env('database_password', ''),
+            'hostport' => env('database_port', '3306'),
+            'charset'  => env('database_charset', 'utf8'),
+            'prefix'   => env('database_table_prefix', 'mac_'),
+        ];
+        
+        Db::connect($config);
         $this->movieModel = Db::name('movie');
     }
 
