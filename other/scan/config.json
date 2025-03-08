@@ -8,6 +8,28 @@
     },
     "translation_tables": [
         {
+            "table_name": "mac_type",
+            "primary_key": "type_id",
+            "fields": [
+                {
+                    "name": "type_name",
+                    "translated_name": "type_name"
+                },
+                {
+                    "name": "type_key",
+                    "translated_name": "type_key"
+                },
+                {
+                    "name": "type_des",
+                    "translated_name": "type_des"
+                },
+                {
+                    "name": "type_title",
+                    "translated_name": "type_title"
+                }
+            ]
+        },
+        {
             "table_name": "mac_vod",
             "primary_key": "vod_id",
             "fields": [

@@ -42,6 +42,11 @@ func main() {
 		log.Fatalf("Failed to initialize database service: %v", err)
 	}
 
+	// 初始化表信息
+	if err := dbService.InitializeTableInfo(config.TranslationTables); err != nil {
+		log.Fatalf("Failed to initialize table info: %v", err)
+	}
+
 	// 初始化翻译服务
 	translationService := services.NewTranslationService(config.TranslationAPI.URL)
 
