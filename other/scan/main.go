@@ -7,7 +7,6 @@ import (
 	"os"
 	"scan/models"
 	"scan/services"
-	"time"
 )
 
 func loadConfig() (*models.Config, error) {
@@ -121,7 +120,7 @@ func main() {
 			}
 
 			// 添加短暂延迟以避免请求过快
-			time.Sleep(100 * time.Millisecond)
+			//time.Sleep(100 * time.Millisecond)
 		}
 
 		log.Printf("Completed processing table: %s", table.TableName)
